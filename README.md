@@ -1,6 +1,8 @@
 # java-piped-streams-test
 
-This repository is used to demonstrate a (supposed) bug in `java.io.PipedInputStream` (the Oracle Java 1.7.0_67 implementation). It is a minimal working example to deminstrate that the `PipedInputStream` contains a bug (?) which causes the corresponding `PipedOutputStream` to wait up to one second for free space to write to, when actually the space is free sooner. One second might be rather long for some applications.
+**NOTE**: The described bug has been reported and its status is *Won't Fix*. See http://stackoverflow.com/a/28617908/4585628 for more information.
+
+This repository is used to demonstrate a bug in `java.io.PipedInputStream` (the Oracle Java implementation, present in 1.7 and 1.8). It is a minimal working example to deminstrate that the `PipedInputStream` contains a bug which causes the corresponding `PipedOutputStream` to wait up to one second for free space to write to, when actually the space is free sooner. One second might be rather long for some applications.
 
 ## Problem Description
 
