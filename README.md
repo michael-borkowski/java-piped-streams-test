@@ -2,6 +2,8 @@
 
 This repository is used to demonstrate a (supposed) bug in `java.io.PipedInputStream` (the Oracle Java 1.7.0_67 implementation). It is a minimal working example to deminstrate that the `PipedInputStream` contains a bug (?) which causes the corresponding `PipedOutputStream` to wait up to one second for free space to write to, when actually the space is free sooner. One second might be rather long for some applications.
 
+## Problem Description
+
 The basic problem boils down to the following code:
 
     private static void threadA() throws IOException, InterruptedException {
@@ -53,4 +55,14 @@ The `wait(1000)` is only interrupted by either hitting the timeout (1000 ms, as 
 
 Oracle's implementation of the `read()` method is quite long, I won't include it here, but it can be found on the web (for example [here](http://www.docjar.com/html/api/java/io/PipedInputStream.java.html) at lines 304 to 342).
 
+## Suggested Fix
+
 A suggested patch would be to add a call to `notifyAll()` in `read()` immediately before the `return` statement. I'm not sure how that would affect overall performance, but it fixes the demonstrated issue (`awaitSpace()` exits immediately instead of waiting up to 1000 ms).
+
+## Used Java Version
+
+    $ java -version
+    java version "1.7.0_67"
+    Java(TM) SE Runtime Environment (build 1.7.0_67-b01)
+    Java HotSpot(TM) 64-Bit Server VM (build 24.65-b04, mixed mode)
+
