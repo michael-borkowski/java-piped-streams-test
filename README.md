@@ -59,6 +59,8 @@ Oracle's implementation of the `read()` method is quite long, I won't include it
 
 A suggested patch would be to add a call to `notifyAll()` in `read()` immediately before the `return` statement. I'm not sure how that would affect overall performance, but it fixes the demonstrated issue (`awaitSpace()` exits immediately instead of waiting up to 1000 ms).
 
+In order to avoid unnecessary overhead using `notifyAll()`, a boolean flag can be used -- it is set to `true` whenever a `sleep()` is occurring, and only if the flag is `true`, a `notifyAll()` is issued (resetting the flag to `false`).
+
 ## Affected Java Versions
 
 The following versions have been verified as affected.
