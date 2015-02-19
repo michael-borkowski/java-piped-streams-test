@@ -53,4 +53,4 @@ The `wait(1000)` is only interrupted by either hitting the timeout (1000 ms, as 
 
 Oracle's implementation of the `read()` method is quite long, I won't include it here, but it can be found on the web (for example [here](http://www.docjar.com/html/api/java/io/PipedInputStream.java.html) at lines 304 to 342).
 
-A suggested patch would be to add a call to `notifyAll()` in `read()` immediately before the `return` statement. I'm not sure how that would affect overall performance, but it fixes the demonstrated issue (`awaitSpace()` exits immediately instead of waiting up to 1000 ms.
+A suggested patch would be to add a call to `notifyAll()` in `read()` immediately before the `return` statement. I'm not sure how that would affect overall performance, but it fixes the demonstrated issue (`awaitSpace()` exits immediately instead of waiting up to 1000 ms).
