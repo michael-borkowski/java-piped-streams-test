@@ -59,10 +59,17 @@ Oracle's implementation of the `read()` method is quite long, I won't include it
 
 A suggested patch would be to add a call to `notifyAll()` in `read()` immediately before the `return` statement. I'm not sure how that would affect overall performance, but it fixes the demonstrated issue (`awaitSpace()` exits immediately instead of waiting up to 1000 ms).
 
-## Used Java Version
+## Affected Java Versions
+
+The following versions have been verified as affected.
 
     $ java -version
     java version "1.7.0_67"
     Java(TM) SE Runtime Environment (build 1.7.0_67-b01)
     Java HotSpot(TM) 64-Bit Server VM (build 24.65-b04, mixed mode)
+
+    $ java -version
+    java version "1.8.0_31"
+    Java(TM) SE Runtime Environment (build 1.8.0_31-b13)
+    Java HotSpot(TM) 64-Bit Server VM (build 25.31-b07, mixed mode)
 
