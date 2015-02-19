@@ -73,3 +73,6 @@ The following versions have been verified as affected.
     Java(TM) SE Runtime Environment (build 1.8.0_31-b13)
     Java HotSpot(TM) 64-Bit Server VM (build 25.31-b07, mixed mode)
 
+## StackOverflow Question
+
+http://stackoverflow.com/q/28617175/4585628
